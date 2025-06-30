@@ -44,7 +44,7 @@ def gerenciar_eventos_menu():
 
         opcoes = {
             
-                "1": listar_eventos,
+                "1": exibir_eventos,
                 "2": adicionar_evento, 
                 "3": remover_evento,
                 "4": editar_evento,
