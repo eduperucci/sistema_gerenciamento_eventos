@@ -1,23 +1,16 @@
-from funcoesextras import ler_data, gerar_id_reutilizavel
+from dados import lista_eventos
+from util import ler_data, gerar_id, corrigir_id_duplicados
+from funcoes_eventos import eventos_na_mesma_data
 
-lista_eventos = [
-    {"id": 1, "tema": "Inteligência Artificial", "nome": "Smart Homes", "data": "15/02/2025"},
-    {"id": 2, "tema": "Inteligência Artificial", "nome": "Vão roubar nossos empregos", "data": "15/02/2025"},
-    {"id": 2, "tema": "Web", "nome": "HTML avaçado", "data": "15/02/2025"}
-    ]
-
-def exibir_eventos():
-    print("\n====EVENTOS DISPONÍVEIS====")
-
-    if not lista_eventos:
-        print("\nNenhum evento cadastrado")
-
-    listar_eventos() 
+corrigir_id_duplicados(lista_eventos)
 
 
 def listar_eventos():
+    print("\n====EVENTOS DISPONÍVEIS====")
     for evento in lista_eventos:
         print(f"ID: {evento['id']} // TEMA: {evento['tema']} // NOME: {evento['nome']} // DATA: {evento['data']}")
+    if not lista_eventos:
+        print("\nNenhum evento cadastrado")
 
 
 def adicionar_evento():
@@ -25,40 +18,46 @@ def adicionar_evento():
         print("\n====ADICIONAR EVENTOS OPÇÕES====")
         print("0. Voltar\n")
 
+        #Adicionar tema do evento
         tema_dig = input("Digite o tema do evento: ")
         if tema_dig == '0':
             return
         
+        #Adicionar nome do evento
         nome_dig = input("Digite o nome do evento: ")
         if nome_dig == '0':
             return
 
         data_dig = ler_data()
-        id_gerado = gerar_id_reutilizavel(lista_eventos)
 
+        if eventos_na_mesma_data(tema_dig, nome_dig, data_dig, lista_eventos):
+            print("\nJá está definido um evento igual nessa data, tente outra data")
+            continue
+
+        id_gerado = gerar_id(lista_eventos)
+
+        #Keus e valores dos eventos
         eventos = {
             "id": id_gerado,    
             "tema": tema_dig,
             "nome": nome_dig,
-            "data": data_dig
+            "data": data_dig  
         }
         
+        #Armazena os eventos em uma lista
         lista_eventos.append(eventos)
-        print(f"\nEvento {tema_dig} criado com sucesso.")
+        print(f"\nEvento {nome_dig} criado com sucesso.")
         return
 
 
 def remover_evento():
     while True:
         print("\n====REMOVER EVENTOS OPÇÕES====")
-        print("0. Voltar")
-        print("\n----EVENTOS PARA REMOVER----")
-        listar_eventos()
+        print("0. Voltar\n")
 
         if not lista_eventos:
             print("Nenhum evento cadastrado")
             return
-        
         
         try:
             remover_id = int(input("Digite o ID do evento para remover: "))
@@ -107,7 +106,7 @@ def editar_evento():
                 novo_tema = input(f"Tema atual: {evento['tema']} // Digite um novo tema: ").strip() #DEVO CRIAR FUNÇÃO
                 if novo_tema == '0':
                     return
-                if novo_tema != '':
+                elif novo_tema != '':
                     lista_editada["tema"] = novo_tema
                 
 

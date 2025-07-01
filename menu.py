@@ -1,6 +1,8 @@
 from eventos import *
 from participantes import *
 from relatorios import *
+from funcoes_participantes import *
+from dados import *
 
 def opcao_sair():
     exit()
@@ -28,8 +30,7 @@ def menu_principal():
         if acao:
             acao()
         else:
-            print("\nDigite uma opção: ")
-
+            print("Opção inválida")
 
 
 def gerenciar_eventos_menu(): 
@@ -44,7 +45,7 @@ def gerenciar_eventos_menu():
 
         opcoes = {
             
-                "1": exibir_eventos,
+                "1": listar_eventos,
                 "2": adicionar_evento, 
                 "3": remover_evento,
                 "4": editar_evento,
@@ -75,10 +76,10 @@ def gerenciar_participantes_menu():
 
         opcoes = {
             
-                "1": lista_participantes,
-                "2": buscar_participante, 
-                "3": adicionar_evento,
-                "4": editar_evento,
+                "1": listar_participantes,
+                "2": buscar_participante_menu, 
+                "3": adicionar_participante,
+                "4": remover_participante,
                 "5": agrupar_evento,
             }
         
@@ -93,6 +94,30 @@ def gerenciar_participantes_menu():
         else:
             print(f"\n {opcao} é uma opção inválida")
 
+def buscar_participante_menu():
+    while True:
+        print("===\nBuscar participante===")
+        print("1. Buscar por CPF")
+        print("2. Buscar por nome")
+        print("3. Buscar por email")
+        print("0. voltar")
+
+        opcoes = {
+            "1": buscar_por_cpf,
+            "2": buscar_por_nome,
+            "3": buscar_por_email,
+        }
+
+        opcao = input("\nDigite uma opção: ") 
+
+        acao = opcoes.get(opcao)
+
+        if acao:
+            acao()
+        elif opcao == "0":
+            return
+        else:
+            print(f"\n {opcao} é uma opção inválida")
 
 
 def analisar_relatorios_menu():
