@@ -1,7 +1,6 @@
 from util_participantes import *
 from dados import lista_eventos, lista_de_participantes
 
-lista_de_participantes = []
 
 def listar_participantes():
     for participante in lista_de_participantes:
@@ -9,16 +8,13 @@ def listar_participantes():
     if not lista_de_participantes:
         print("Nenhum participante cadastrado")
 
-
-def buscar_participante(): pass
-
-
 def adicionar_participante():
+    print("---Adcionar Participante---")
     nome = input("Digite o nome do participante: ")
     if nome == '0':
         return
     
-    email = input("Digite o email do participante: ")
+    email = input("Digite o email do participante: ").strip().lower()
     if email == '0':
         return
     
@@ -40,10 +36,33 @@ def adicionar_participante():
     return
 
 
-def remover_participante(): pass
+def remover_participante():
+    if not lista_de_participantes:
+        print("Participantes não cadastrados")
+        return
+    while True:
+        print("\n---Remover Participante")
+        print("1. Listar Participantes")
+        print("0. voltar")
+
+        acao = input("Digite o nome, cpf ou email para remover: ")
+        if acao == '1':
+            listar_participantes()
+        elif acao == '0':
+            return
+        else:
+            for participante in lista_de_participantes:
+                if participante['cpf'] == acao or participante['nome'] == acao or participante['email'] == acao:
+                    lista_de_participantes.remove(participante)
+                    print(f"Parcipante {participante['nome']} removido ")
+        
+
+    
+
+
+
+
+
 
 
 def editar_dados_partipante(): pass
-
-
-def agrupar_eventos(): pass

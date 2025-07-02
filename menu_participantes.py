@@ -54,3 +54,5 @@ def buscar_participante_menu():
             return
         else:
             print(f"\n {opcao} é uma opção inválida")
+
+        

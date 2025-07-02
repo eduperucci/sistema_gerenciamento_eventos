@@ -63,6 +63,39 @@ def buscar_por_cpf():
                 print(f"CPF: {participante['cpf']} // NOME: {participante['nome']} // EMAIL: {participante['email']} // TEMAS DE INTERESSE: {participante['temas']}")
                 return participante
             
-def buscar_por_nome(): pass
+def buscar_por_nome():
 
-def buscar_por_email(): pass
+    if not lista_de_participantes:
+        print("Nenhum participante cadastrado")
+        return
+    
+    while True:
+        nome = input("Digite o nome para busca: ").strip().lower()
+
+        if nome == '0':
+            return None
+        
+        for participante in lista_de_participantes:
+            if participante.get('nome') == nome:
+                print("---Participante encontrado---")
+                print(f"CPF: {participante['cpf']} // NOME: {participante['nome']} // EMAIL: {participante['email']} // TEMAS DE INTERESSE: {participante['temas']}")
+                return participante
+
+    
+
+def buscar_por_email():
+    if not lista_de_participantes:
+        print("Nenhum participante cadastrado")
+        return
+    
+    while True:
+        email = input("Digite o nome para busca: ").strip().lower()
+
+        if email == '0':
+            return None
+        
+        for participante in lista_de_participantes:
+            if participante.get('email') == email:
+                print("---Participante encontrado---")
+                print(f"CPF: {participante['cpf']} // NOME: {participante['nome']} // EMAIL: {participante['email']} // TEMAS DE INTERESSE: {participante['temas']}")
+                return participante
