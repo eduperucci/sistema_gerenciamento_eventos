@@ -1,8 +1,7 @@
-from util import corrigir_id_duplicados, gerar_id
-from funcoes_participantes import temas_de_interesse, cadastro_cpf
+from util_participantes import *
 from dados import lista_eventos, lista_de_participantes
 
-corrigir_id_duplicados(lista_de_participantes)
+lista_de_participantes = []
 
 def listar_participantes():
     for participante in lista_de_participantes:

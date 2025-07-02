@@ -1,6 +1,6 @@
 from dados import lista_eventos
-from util import ler_data, gerar_id, corrigir_id_duplicados
-from funcoes_eventos import eventos_na_mesma_data
+from util_eventos import *
+from util import ler_data
 
 corrigir_id_duplicados(lista_eventos)
 
@@ -36,12 +36,13 @@ def adicionar_evento():
 
         id_gerado = gerar_id(lista_eventos)
 
-        #Keus e valores dos eventos
+        #Keys e valores dos eventos
         eventos = {
             "id": id_gerado,    
             "tema": tema_dig,
             "nome": nome_dig,
-            "data": data_dig  
+            "data": data_dig,
+            "participantes":   
         }
         
         #Armazena os eventos em uma lista
@@ -54,6 +55,7 @@ def remover_evento():
     while True:
         print("\n====REMOVER EVENTOS OPÇÕES====")
         print("0. Voltar\n")
+        listar_eventos()
 
         if not lista_eventos:
             print("Nenhum evento cadastrado")
