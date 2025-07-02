@@ -1,47 +1,27 @@
 from dados import lista_de_participantes, lista_eventos
+from eventos import listar_eventos
 
-def temas_de_interesse():
-    print("\n====TEMAS DISPONÍVEIS====")
-    if not lista_eventos:
-        print("\nNenhum tema cadastrado")
-        return
-    
-    temas_unicos = set()
-
-    for evento in lista_eventos:
-        temas_unicos.add(evento['tema'].strip())
-
-    temas_ordenados = sorted(temas_unicos)
-    
-    for i, tema in enumerate(temas_ordenados):
-        print(f'{i+1}. {tema}')
-
-    temas_selecionados = []
-
+def evento_do_participante():
+    print("\n---CADASTRAR EVENTOS---")
     while True:
-        escolha = input("\nDigite o número do tema de interesse ou pressione [Enter] para terminar: ").strip()
+        if not lista_eventos:
+            print("\nNenhum tema cadastrado")
+            return
+        else:
+            listar_eventos()
+            try:
+                evento_escolhido = int(input("Digite o ID do evento para cadastrar: "))
+            except ValueError:
+                print("ID inválido digite apenas núemeros")
+                continue
 
-        if escolha == '':
-            print("Salvo.")
-            break
-
-        try:
-            escolha_int = int(escolha)
-            if 1 <= escolha_int <= len(temas_ordenados):
-                tema_escolhido = temas_ordenados[escolha_int - 1]
-                if tema_escolhido not in temas_selecionados:
-                    temas_selecionados.append(tema_escolhido)
-                    print(f"'{tema_escolhido}' adicionado aos temas de interesse.")
-                else:
-                    print("Tema já selecionado anteriormente.")
-            else:
-                print("Número fora do intervalo, tente novamente.")
-        except ValueError:
-            print("Número inválido, digite apenas números ou pressione [Enter] para salvar.")
-
-    if not temas_selecionados:
-        return "Nehum tema selecionado"
-    return temas_selecionados
+            if evento_escolhido == 0:
+                return
+            
+            for evento in lista_eventos:
+                if evento['id'] == evento_escolhido:
+                    formatacao = (f"\n Evento:{evento['id']} \n Tema: {evento['tema']} \n Nome:{evento['nome']}\n Data:{evento['data']}")
+                    return formatacao
 
 def cadastro_cpf():
     while True:
@@ -63,7 +43,7 @@ def cadastro_cpf():
                 continue
         
         return cpf
-    
+        
 
 def buscar_por_cpf():
 

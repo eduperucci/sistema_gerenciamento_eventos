@@ -8,7 +8,7 @@ corrigir_id_duplicados(lista_eventos)
 def listar_eventos():
     print("\n====EVENTOS DISPONÍVEIS====")
     for evento in lista_eventos:
-        print(f"ID: {evento['id']} // TEMA: {evento['tema']} // NOME: {evento['nome']} // DATA: {evento['data']}")
+        print(f"\nID: {evento['id']}\n TEMA: {evento['tema']}\n NOME: {evento['nome']}\n DATA: {evento['data']}")
     if not lista_eventos:
         print("\nNenhum evento cadastrado")
 
@@ -41,8 +41,7 @@ def adicionar_evento():
             "id": id_gerado,    
             "tema": tema_dig,
             "nome": nome_dig,
-            "data": data_dig,
-            "participantes":   
+            "data": data_dig,  
         }
         
         #Armazena os eventos em uma lista

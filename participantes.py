@@ -5,7 +5,7 @@ lista_de_participantes = []
 
 def listar_participantes():
     for participante in lista_de_participantes:
-        print(f"CPF: {participante['cpf']} // NOME: {participante['nome']} // EMAIL: {participante['email']} // TEMAS DE INTERESSE: {participante['temas']} }}")
+        print(f"\nCPF: {participante['cpf']}\nNOME: {participante['nome']}\nEMAIL: {participante['email']}\nEVENTOS CADASTRADOS: {participante['evento_cadastrado']}")
     if not lista_de_participantes:
         print("Nenhum participante cadastrado")
 
@@ -25,19 +25,17 @@ def adicionar_participante():
     cpf = cadastro_cpf()
     if cpf is None:
         return
-  
-    temas_ecolhidos = temas_de_interesse()
 
+    evento_cadastrado = evento_do_participante()
 
-
-    partipantes = {
+    participantes = {
         "cpf": cpf,
-        "nome": nome,
+        "nome": nome,   
         "email": email,
-        "temas": temas_ecolhidos,
+        "evento_cadastrado": evento_cadastrado,
     }
 
-    lista_de_participantes.append(partipantes)
+    lista_de_participantes.append(participantes)
     print(f"\nParticipante {nome} adicionado com sucesso.")
     return
 

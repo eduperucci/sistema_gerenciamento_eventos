@@ -16,7 +16,6 @@ def gerenciar_participantes_menu():
                 "2": buscar_participante_menu, 
                 "3": adicionar_participante,
                 "4": remover_participante,
-                "5": agrupar_evento,
             }
         
         opcao = input("\nDigite uma opção: ") 
