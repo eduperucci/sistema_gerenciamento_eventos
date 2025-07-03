@@ -6,7 +6,7 @@ corrigir_id_duplicados(lista_eventos)
 
 
 def listar_eventos():
-    print("\n====EVENTOS DISPONÍVEIS====")
+    print("\n---EVENTOS DISPONÍVEIS---")
     for evento in lista_eventos:
         print(f"\nID: {evento['id']}\n TEMA: {evento['tema']}\n NOME: {evento['nome']}\n DATA: {evento['data']}")
     if not lista_eventos:
