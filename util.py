@@ -8,7 +8,7 @@ limpar_tela()
 
 def ler_data():
     while True:
-        data_digitada = input("Difina a nova data do evento (DD/MM/AAAA): ").strip()
+        data_digitada = input("Digite data do evento (DD/MM/AAAA): ").strip()
         if data_digitada == '0':
             return
         

@@ -148,4 +148,3 @@ def editar_evento():
             print(f"Evento inexistente com o ID: {editar_id}.")
 
 
-def agrupar_evento(): pass
