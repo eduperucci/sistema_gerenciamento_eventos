@@ -1,46 +1,85 @@
 from dados import lista_de_participantes, lista_eventos
 from eventos import listar_eventos
+from util import limpar_tela
+
+
+def listar_eventos():
+    if not lista_eventos:
+        print("Nenhum evento cadastrado.")
+        return
+    print("\n---LISTA DE EVENTOS DISPONÍVEIS---")
+    for evento in lista_eventos:
+        print(f"ID: {evento['id']} // Tema: {evento['tema']} // Nome: {evento['nome']} // Data: {evento['data']}")
+    print("-" * 30)
+
 
 def evento_do_participante():
-    print("\n---CADASTRAR EVENTOS---")
-    print("0. Cancelar")
+    print("\n--- SELECIONAR EVENTOS PARA O PARTICIPANTE ---")
+    
     if not lista_eventos:
-        print("\nNenhum evento cadastrado")
-        return
+        print("\nNenhum evento cadastrado. Não é possível associar eventos.")
+        return None
 
     eventos_escolhidos = []
 
     while True:
         listar_eventos()
-        evento_escolhido = input("Digite o ID do evento para cadastrar: ")
-
-        if evento_escolhido == '':
-            break
+        print("\nDigite o ID do evento para adicionar (pode adicionar múltiplos).")
+        print("[ENTER] salvar operação")
+        print("[0] Cancelar Operação")
         
-        if evento_escolhido == '0':
-            break
+        entrada_usuario = input("ID do evento: ").strip()
+
+        if entrada_usuario == '0':
+            print("Seleção de eventos cancelada. O cadastro do participante será abortado.")
+            return None
+
+
+        if entrada_usuario == '':
+            if not eventos_escolhidos:
+                print("Você deve cadastrar o participante em pelo menos um evento antes de finalizar, ou digite [0] para cancelar.")
+                continue
+            else:
+                print("Seleção de eventos finalizada.")
+                return eventos_escolhidos
+        
 
         try:
-            evento_escolhido = int(evento_escolhido)
+            evento_id = int(entrada_usuario)
         except ValueError:
-            print("ID inválido. Digite apenas números.")
+            print("ID inválido. Digite um número, '0' para cancelar, ou ENTER para finalizar.")
             continue
 
+        evento_encontrado = None
         for evento in lista_eventos:
-            if evento['id'] == evento_escolhido:
-                if evento in eventos_escolhidos:
-                    print("Evento já cadastrado.")
-                else:
-                    eventos_escolhidos.append(evento)
-                    print(f"Evento {evento['nome']} cadastrado com sucesso")
-                    formatacao = (f"\n Evento:{evento['id']} \n Tema: {evento['tema']} \n Nome:{evento['nome']}\n Data:{evento['data']}")
-                    print(formatacao)
+            if evento['id'] == evento_id:
+                evento_encontrado = evento
                 break
+        
+        if evento_encontrado:
+            if evento_encontrado in eventos_escolhidos:
+                print(f"Evento '{evento_encontrado['nome']}' já foi adicionado a esta seleção.")
+            else:
+                eventos_escolhidos.append(evento_encontrado)
+                print(f"Evento '{evento_encontrado['nome']}' adicionado à seleção.")
+                print("Eventos selecionados até agora:")
+                for ev in eventos_escolhidos:
+                    print(f"  - ID: {ev['id']}, Nome: {ev['nome']}")
         else:
-            print("ID de evento inválido, tente novamente.")
+            print(f"Evento com ID '{evento_id}' não encontrado. Por favor, digite um ID da lista.")
 
-    return eventos_escolhidos
+def verificar_cpf_existente(cpf, lista_de_participantes):
+    
+    for participante in lista_de_participantes:
+        if participante['cpf'] == cpf:
+            return True
+    return False
 
+def verificar_email_existente(email, lista_de_participantes):
+    
+    for participante in lista_de_participantes:
+        if participante['email'].lower() == email.lower():
+            return True
 
 def cadastro_cpf():
     while True:
