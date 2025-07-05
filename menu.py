@@ -1,10 +1,12 @@
 from menu_eventos import gerenciar_eventos_menu
 from menu_participantes import gerenciar_participantes_menu
 from menu_relatorios import analisar_relatorios_menu
+from util import limpar_tela
 
 
 def menu_principal():
     while True:
+        limpar_tela()
         print("\n====SISTEMA DE GERENCIAMENTO DE EVENTOS===") 
         print("1. Gerenciar eventos")
         print("2. Gerenciar participantes")

@@ -1,8 +1,10 @@
 from eventos import *
+from util import limpar_tela
 
 
 def gerenciar_eventos_menu(): 
     while True:
+        limpar_tela()
         print("\n===GERENCIAR EVENTOS===")
         print("1. Listar eventos")
         print("2. Buscar evento")
@@ -13,7 +15,7 @@ def gerenciar_eventos_menu():
 
         opcoes = {
             
-                "1": listar_eventos,
+                "1": listar_eventos_opcoes,
                 "2": buscar_evento_menu,
                 "3": adicionar_evento, 
                 "4": remover_evento,
@@ -33,6 +35,7 @@ def gerenciar_eventos_menu():
 
 def buscar_evento_menu():
     while True:
+        limpar_tela()
         print("\n===BUSCAR EVENTO===")
         print("1. Buscar por tema")
         print("2. Buscar por nome")
@@ -43,6 +46,7 @@ def buscar_evento_menu():
             "1": buscar_por_tema,
             "2": buscar_por_nome,
             "3": buscar_por_data,
+            "4": listar_eventos_opcoes,
         }
 
         opcao = input("\nDigite uma opção: ") 

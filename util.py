@@ -6,6 +6,15 @@ def limpar_tela():
 limpar_tela()
 
 
+def enter_continuar():
+    user_input = input("\nPressione Enter para continuar...")
+    if  user_input!= '':
+        print("Aperte apenas Enter para continuar")
+        limpar_tela()
+    else:
+        return
+
+
 def ler_data():
     while True:
         data_digitada = input("Digite data do evento (DD/MM/AAAA): ").strip()

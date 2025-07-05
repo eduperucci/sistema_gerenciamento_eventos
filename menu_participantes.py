@@ -2,6 +2,7 @@ from participantes import *
 
 def gerenciar_participantes_menu():
     while True:
+        limpar_tela()
         print("\n===GERENCIAR PARCIPANTES===")
         print("1. Listar participantes")
         print("2. Buscar participante")
@@ -12,7 +13,7 @@ def gerenciar_participantes_menu():
 
         opcoes = {
             
-                "1": listar_participantes,
+                "1": listar_participantes_opcoes,
                 "2": buscar_participante_menu, 
                 "3": adicionar_participante,
                 "4": remover_participante,

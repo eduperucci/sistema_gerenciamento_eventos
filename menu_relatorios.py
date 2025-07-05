@@ -1,18 +1,18 @@
 from relatorios import *
+from util import limpar_tela
 
 def analisar_relatorios_menu():
     while True:
+        limpar_tela()
         print("\n===ANALISAR RELATÓRIOS===")
-        print("1. Frequência dos Temas")
-        print("2. Taxa de participação")
-        print("3. Participantes mais ativos")
+        print("1. Participantes por tema")
+        print("2. Participantes por evento")
         print("0. Voltar")
 
         opcoes = {
             
-                "1": temas_frequentes,
-                "2": taxa_de_participacao, 
-                "3": participantes_mais_ativos,
+                "1": participantes_por_tema,
+                "2": participantes_por_evento,
             }
         
         opcao = input("\nDigite uma opção: ") 

@@ -3,15 +3,6 @@ from eventos import listar_eventos
 from util import limpar_tela
 
 
-def listar_eventos():
-    if not lista_eventos:
-        print("Nenhum evento cadastrado.")
-        return
-    print("\n---LISTA DE EVENTOS DISPONÍVEIS---")
-    for evento in lista_eventos:
-        print(f"ID: {evento['id']} // Tema: {evento['tema']} // Nome: {evento['nome']} // Data: {evento['data']}")
-    print("-" * 30)
-
 
 def evento_do_participante():
     print("\n--- SELECIONAR EVENTOS PARA O PARTICIPANTE ---")
@@ -25,29 +16,29 @@ def evento_do_participante():
     while True:
         listar_eventos()
         print("\nDigite o ID do evento para adicionar (pode adicionar múltiplos).")
-        print("[ENTER] salvar operação")
-        print("[0] Cancelar Operação")
+        print("ENTER. salvar operação")
+        print("0. Cancelar Operação")
         
-        entrada_usuario = input("ID do evento: ").strip()
+        entrada_usuario = input("\nID do evento: ").strip()
 
         if entrada_usuario == '0':
-            print("Seleção de eventos cancelada. O cadastro do participante será abortado.")
+            print("\nSeleção de eventos cancelada. O cadastro do participante será abortado.")
             return None
 
 
         if entrada_usuario == '':
             if not eventos_escolhidos:
-                print("Você deve cadastrar o participante em pelo menos um evento antes de finalizar, ou digite [0] para cancelar.")
+                print("\nVocê deve cadastrar o participante em pelo menos um evento antes de finalizar, ou digite [0] para cancelar.")
                 continue
             else:
-                print("Seleção de eventos finalizada.")
+                print("\nSeleção de eventos finalizada.")
                 return eventos_escolhidos
         
 
         try:
             evento_id = int(entrada_usuario)
         except ValueError:
-            print("ID inválido. Digite um número, '0' para cancelar, ou ENTER para finalizar.")
+            print("\nID inválido. Digite um número, '0' para cancelar, ou ENTER para finalizar.")
             continue
 
         evento_encontrado = None
@@ -58,15 +49,15 @@ def evento_do_participante():
         
         if evento_encontrado:
             if evento_encontrado in eventos_escolhidos:
-                print(f"Evento '{evento_encontrado['nome']}' já foi adicionado a esta seleção.")
+                print(f"\nEvento '{evento_encontrado['nome']}' já foi adicionado a esta seleção.")
             else:
                 eventos_escolhidos.append(evento_encontrado)
-                print(f"Evento '{evento_encontrado['nome']}' adicionado à seleção.")
-                print("Eventos selecionados até agora:")
+                print(f"\nEvento '{evento_encontrado['nome']}' adicionado à seleção.")
+                print("\nEventos selecionados até agora:")
                 for ev in eventos_escolhidos:
                     print(f"  - ID: {ev['id']}, Nome: {ev['nome']}")
         else:
-            print(f"Evento com ID '{evento_id}' não encontrado. Por favor, digite um ID da lista.")
+            print(f"\nEvento com ID '{evento_id}' não encontrado. Por favor, digite um ID da lista.")
 
 def verificar_cpf_existente(cpf, lista_de_participantes):
     
@@ -83,21 +74,21 @@ def verificar_email_existente(email, lista_de_participantes):
 
 def cadastro_cpf():
     while True:
-        cpf = input("Digite seu cpf: ")
+        cpf = input("Digite seu CPF: ")
         if cpf == '':
-            print("CPF não digitado")
+            print("\nCPF não digitado")
             continue
 
         if cpf == '0':
             return None
         
         if not cpf.isdigit() or len(cpf) < 10:
-            print("CPF inválido: precisa de pelo menos 10 dígitos numéricos.")
+            print("\nCPF inválido: precisa de pelo menos 10 dígitos numéricos.")
             continue
         
         for participante in lista_de_participantes:
             if participante.get("cpf") == cpf:
-                print("CPF já cadastrado em outro participante.")
+                print("\nCPF já cadastrado em outro participante.")
                 continue
         
         return cpf
@@ -105,11 +96,11 @@ def cadastro_cpf():
 
 def buscar_por_cpf():
     if not lista_de_participantes:
-        print("Nenhum participante cadastrado")
+        print("\nNenhum participante cadastrado")
         return
     
     while True:
-        cpf = input("Digite o CPF para busca: ")
+        cpf = input("\nDigite o CPF para busca: ")
 
         if cpf == '0':
             return None
@@ -117,18 +108,18 @@ def buscar_por_cpf():
         buscador = list(filter(lambda x: x.get('cpf') == cpf, lista_de_participantes))
         if buscador:
             participante = buscador[0]
-            print("---Participante encontrado---")
-            print(f"CPF: {participante['cpf']} // NOME: {participante['nome']} // EMAIL: {participante['email']} // TEMAS DE INTERESSE: {participante['temas']}")
+            print("   \n-Participante encontrado-")
+            print(f"   CPF: {participante['cpf']} // NOME: {participante['nome']} // EMAIL: {participante['email']} ")
             return participante
             
 
 def buscar_por_nome():
     if not lista_de_participantes:
-        print("Nenhum participante cadastrado")
+        print("\nNenhum participante cadastrado")
         return
     
     while True:
-        nome = input("Digite o nome para busca: ").strip().lower()
+        nome = input("\nDigite o nome para busca: ").strip().lower()
 
         if nome == '0':
             return None
@@ -136,18 +127,18 @@ def buscar_por_nome():
         buscador = list(filter(lambda x: x.get('nome').lower() == nome, lista_de_participantes))
         if buscador:
             participante = buscador[0]
-            print("---Participante encontrado---")
-            print(f"CPF: {participante['cpf']} // NOME: {participante['nome']} // EMAIL: {participante['email']} // TEMAS DE INTERESSE: {participante['temas']}")
+            print("   \n---Participante encontrado---")
+            print(f"   CPF: {participante['cpf']} // NOME: {participante['nome']} // EMAIL: {participante['email']}")
             return participante
 
     
 def buscar_por_email():
     if not lista_de_participantes:
-        print("Nenhum participante cadastrado")
+        print("\nNenhum participante cadastrado")
         return
     
     while True:
-        email = input("Digite o nome para busca: ").strip().lower()
+        email = input("\nDigite o nome para busca: ").strip().lower()
 
         if email == '0':
             return None
@@ -155,6 +146,6 @@ def buscar_por_email():
         buscador = list(filter(lambda x: x.get('email').lower() == email, lista_de_participantes))
         if buscador:
             participante = buscador[0]
-            print("---Participante encontrado---")
-            print(f"CPF: {participante['cpf']} // NOME: {participante['nome']} // EMAIL: {participante['email']} // TEMAS DE INTERESSE: {participante['temas']}")
+            print("   \n---Participante encontrado---")
+            print(f"   CPF: {participante['cpf']} // NOME: {participante['nome']} // EMAIL: {participante['email']}")
             return participante

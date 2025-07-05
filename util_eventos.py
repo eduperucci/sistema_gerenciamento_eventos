@@ -1,5 +1,6 @@
 from dados import lista_eventos
-from util import limpar_tela, ler_data
+from util import limpar_tela, ler_data, enter_continuar
+
 
 def eventos_na_mesma_data(tema, nome, data, lista):
     tema = tema.strip().lower()
@@ -44,10 +45,13 @@ def buscar_por_tema():
             print("---Eventos encontrados por tema---")
             for evento in buscador:
                 print(f"ID: {evento['id']} // TEMA: {evento['tema']} // NOME: {evento['nome']} // DATA: {evento['data']}")
+            enter_continuar()
             return
         else:
             print(f"Nenhum evento encontrado com o tema '{tema}'. Tente novamente ou digite '0' para voltar.")
+            enter_continuar()
             continue
+
 
 def buscar_por_nome():
     if not lista_eventos:
@@ -64,9 +68,11 @@ def buscar_por_nome():
             print("---Eventos encontrados por nome---")
             for evento in buscador:
                 print(f"ID: {evento['id']} // TEMA: {evento['tema']} // NOME: {evento['nome']} // DATA: {evento['data']}")
+            enter_continuar()
             return
         else:
             print(f"Nenhum evento encontrado com o nome '{nome}'. Tente novamente ou digite '0' para voltar.")
+            enter_continuar()
             continue
 
 def buscar_por_data():
@@ -84,7 +90,9 @@ def buscar_por_data():
             print("---Eventos encontrados por data---")
             for evento in buscador:
                 print(f"ID: {evento['id']} // TEMA: {evento['tema']} // NOME: {evento['nome']} // DATA: {evento['data']}")
+            enter_continuar()
             return
         else:
             print(f"Nenhum evento encontrado na data '{data}'. Tente novamente ou digite '0' para voltar.")
+            enter_continuar()
             continue
